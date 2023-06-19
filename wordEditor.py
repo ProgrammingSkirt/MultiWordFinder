@@ -107,9 +107,21 @@ def runOnAllFilesInDirectory(path, queryList, colorList):
                 print(dir)
     return 0
 
+def deleteCopies(path):
+    dirList = os.listdir(path)
+    #print(dirList)
+    for dir in dirList:
+        if os.path.isdir(os.path.join(path, dir)):
+            deleteCopies(os.path.join(path, dir))
+        else:
+            if dir.endswith(" - Copy.DOCX"):
+                os.remove(os.path.join(path, dir))
+                print(dir)
+    return 0
+
 def main():
     print("Hello World")
-    queryFile = open("query2.txt", "r")
+    queryFile = open("query.txt", "r")
     queryList = queryFile.readlines()
     queryFile.close()
 
@@ -126,7 +138,9 @@ def main():
     print(queryList)
 
     file = os.path.join('Raw Data')
+    deleteCopies(file)
     runOnAllFilesInDirectory(file, queryList, colorList)
+    
 
 if(__name__ == "__main__"):
     main()
