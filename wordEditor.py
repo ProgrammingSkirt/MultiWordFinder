@@ -67,7 +67,7 @@ def colorFind(query):
         case "violet":
             return WD_COLOR_INDEX.VIOLET
         case _:
-            print(query)
+            #print(query)
             return WD_COLOR_INDEX.YELLOW
 
 def highlightWord(path, queryList, colorList):
@@ -81,7 +81,7 @@ def highlightWord(path, queryList, colorList):
             if len(returnList) != 0:
                 bigList = combineArrays(bigList, returnList, i)
         
-        if(len(bigList) > 0):
+        if(len(bigList) > 0): #May be able to skip this check
             paragraph.clear()
             start = 0
             for word in bigList:
@@ -120,7 +120,7 @@ def deleteCopies(path):
     return 0
 
 def main():
-    print("Hello World")
+    #print("Hello World")
     queryFile = open("query.txt", "r")
     queryList = queryFile.readlines()
     queryFile.close()
@@ -133,9 +133,9 @@ def main():
             colorList.append(WD_COLOR_INDEX.YELLOW)
         else:
             colorList.append(colorFind(temp[1].strip().lower()))
-    print(colorList)
+    #print(colorList)
 
-    print(queryList)
+    #print(queryList)
 
     file = os.path.join('Raw Data')
     deleteCopies(file)
